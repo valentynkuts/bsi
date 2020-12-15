@@ -15,6 +15,7 @@ type Twofish struct {
 
 }
 
+//encrypts the text and save it in the file
 func (t Twofish) encryption() {
 
 	key := []byte(t.key)
@@ -63,6 +64,8 @@ func (t Twofish) encryption() {
 
 }
 
+//read the file and decrypts the information from the file
+//return decrypted text
 func (t Twofish) decryption()string  {
 	key := []byte(t.key)
 	ciphertext, err := ioutil.ReadFile("myfile.data")

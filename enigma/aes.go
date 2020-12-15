@@ -15,6 +15,7 @@ type Aes struct {
 
 }
 
+//encrypts the text and save it in the file
 func (a Aes) encryption(){
 
 	key := []byte(a.key)
@@ -63,6 +64,8 @@ func (a Aes) encryption(){
 
 }
 
+//read the file and decrypts the information from the file
+//return decrypted text
 func (a Aes) decryption() string{
 	key := []byte(a.key)
 	ciphertext, err := ioutil.ReadFile("myfile.data")
