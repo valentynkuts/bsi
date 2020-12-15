@@ -17,13 +17,10 @@ type Twofish struct {
 
 func (t Twofish) encryption() {
 
-	//key := []byte(t.key)
-	//text := []byte(t.plaintext)
-
 	key := []byte(t.key)
 	text := []byte(t.plaintext)
 
-	// generate a new aes cipher using our 32 byte long key
+	// generate a new twofish cipher using our 24 byte long key
 	c, err := twofish.NewCipher(key)
 	// if there are any errors, handle them
 	if err != nil {
