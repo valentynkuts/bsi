@@ -78,22 +78,28 @@ func (a Aes) decryption() string{
 
 	checkError(err)
 
+	//Create the new Cipher using an aes.NewCipher() function,
+	//passing in our shared key as it’s a primary parameter.
 	c, err := aes.NewCipher(key)
 	if err != nil {
 		fmt.Println(err)
 	}
-
+    // Generate our GCM.
 	gcm, err := cipher.NewGCM(c)
 	if err != nil {
 		fmt.Println(err)
 	}
 
+    //Get Nonce size using the gcm.NonceSize()
 	nonceSize := gcm.NonceSize()
 	if len(ciphertext) < nonceSize {
 		fmt.Println(err)
 	}
-
+	//Extract the nonce from the prefix of the encrypted data.
+	//This is a very important since you can't decrypt the data without the correct nonce.
 	nonce, ciphertext := ciphertext[:nonceSize], ciphertext[nonceSize:]
+
+	//The gcm.Open() function authenticates and decrypts ciphertext.
 	plaintext, err := gcm.Open(nil, nonce, ciphertext, nil)
 	if err != nil {
 		fmt.Println(err)
