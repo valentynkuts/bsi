@@ -1,3 +1,10 @@
+//https://www.youtube.com/watch?v=wXB-V_Keiu8
+//https://pkg.go.dev/crypto/rsa
+//https://pkg.go.dev/crypto/rand
+
+//"RSA encryption and decryption" and "RSA signatures"
+//author: Valentyn Kuts
+
 package main
 
 import (
