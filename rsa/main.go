@@ -1,8 +1,11 @@
-
 //https://www.youtube.com/watch?v=wXB-V_Keiu8
 //https://pkg.go.dev/crypto/rsa
 //https://pkg.go.dev/crypto/rand
 //https://golang.org/pkg/encoding/gob/
+//https://golang.org/pkg/crypto/sha256/
+//https://golang.org/pkg/crypto/x509/
+//https://golang.org/pkg/encoding/asn1/
+//https://golang.org/pkg/encoding/pem/
 
 //"RSA encryption and decryption"
 //author: Valentyn Kuts
