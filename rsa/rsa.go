@@ -115,6 +115,11 @@ func (r Rsa) decryption(privateKey *rsa.PrivateKey) string{
     return decryptedText
 }
 
+//If you are sending data from a Go program to another Go one
+//(as you show in your examples), you can use the package encoding/gob
+//https://golang.org/pkg/encoding/gob/ to serialize (Encode) an object
+//into a slice of bytes and deserialize (Decode) the received bytes back
+//into the Go object.
 
 func saveGobKey(fileName string, key interface{}) {
 	outFile, err := os.Create(fileName)
@@ -126,6 +131,10 @@ func saveGobKey(fileName string, key interface{}) {
 	checkError(err)
 }
 
+//Privacy-Enhanced Mail (PEM) is a de facto file format for storing and sending
+//cryptographic keys, certificates, and other data
+
+//Package x509 parses X.509-encoded keys and certificates.
 func savePEMKey(fileName string, key *rsa.PrivateKey) {
 	outFile, err := os.Create(fileName)
 	checkError(err)
@@ -139,7 +148,8 @@ func savePEMKey(fileName string, key *rsa.PrivateKey) {
 	err = pem.Encode(outFile, privateKey)
 	checkError(err)
 }
-
+//Abstract Syntax Notation One (asn1)
+//It builds self-describing serialised data from complex data structures.
 func savePublicPEMKey(fileName string, pubkey rsa.PublicKey) {
 	asn1Bytes, err := asn1.Marshal(pubkey)
 	checkError(err)
@@ -157,29 +167,30 @@ func savePublicPEMKey(fileName string, pubkey rsa.PublicKey) {
 	checkError(err)
 }
 
+//get public key from file
 func (r Rsa) getPublicKey() *rsa.PublicKey {
-	pemString_pub, err := ioutil.ReadFile("public.pem")
+	pemStringPub, err := ioutil.ReadFile("public.pem")
 	if err != nil {
 		panic(err)
 	}
-	block_pub, _ := pem.Decode([]byte(pemString_pub))
-	public_key, _ := x509.ParsePKCS1PublicKey (block_pub.Bytes)
-	r.publicKey = public_key
-	fmt.Println("After file PUBLIC: ",public_key)
-	return public_key
+	blockPub, _ := pem.Decode([]byte(pemStringPub))
+	publicKey, _ := x509.ParsePKCS1PublicKey (blockPub.Bytes)
+	r.publicKey = publicKey
+	fmt.Println("After file PUBLIC: ",publicKey)
+	return publicKey
 }
-
+//get private key from file
 func (r Rsa) getPrivateKey() *rsa.PrivateKey {
 	pemString, err := ioutil.ReadFile("private.pem")
 	if err != nil {
 		panic(err)
 	}
 	block, _ := pem.Decode([]byte(pemString))
-	private_key, _ := x509.ParsePKCS1PrivateKey(block.Bytes)
+	privateKey, _ := x509.ParsePKCS1PrivateKey(block.Bytes)
 
-	fmt.Println("After file PRIVATE: ",private_key)
-	r.privateKey = private_key
-	return private_key
+	fmt.Println("After file PRIVATE: ",privateKey)
+	r.privateKey = privateKey
+	return privateKey
 }
 
 func checkError(err error) {

@@ -2,6 +2,7 @@
 //https://www.youtube.com/watch?v=wXB-V_Keiu8
 //https://pkg.go.dev/crypto/rsa
 //https://pkg.go.dev/crypto/rand
+//https://golang.org/pkg/encoding/gob/
 
 //"RSA encryption and decryption"
 //author: Valentyn Kuts
@@ -15,18 +16,26 @@ import (
 )
 
 func main() {
-	//selected version of the algorithm: aes or twofish
-	crypto := os.Args[1]
-	fmt.Println(crypto)
-	//selected  option: encr or decr
-	option := os.Args[2]
-	fmt.Println(option)
+    var crypto string
+	var option string
 
-	reader := bufio.NewReader(os.Stdin)
+	if len(os.Args) == 1{
+		crypto = "rsa"
+		option = "encr"
+	} else {
+		//selected version of the algorithm: rsa
+		crypto = os.Args[1]
+		fmt.Println(crypto)
+		//selected  option: encr or decr
+		option = os.Args[2]
+		fmt.Println(option)
+	}
+
+		reader := bufio.NewReader(os.Stdin)
 
 	r := Rsa{}
 
-	r.generateKey() //TODO  → to comment when decrypt
+	//r.generateKey() //TODO  → to comment when decrypt
 
 	if crypto == "rsa" {
 
@@ -36,8 +45,6 @@ func main() {
 			r.plaintext = text
 			fmt.Println(r.plaintext)
 			publicKey := r.getPublicKey()
-			//publicKey := r.publicKey
-			//fmt.Println(publicKey)
 			r.encryption(publicKey)
 		}
 
