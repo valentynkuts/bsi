@@ -35,7 +35,7 @@ func main() {
 
 	r := Rsa{}
 
-	//r.generateKey() //TODO  → to comment when decrypt
+	r.generateKey() //TODO  → to comment when decrypt
 
 	if crypto == "rsa" {
 
