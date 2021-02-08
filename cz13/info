@@ -1,0 +1,17 @@
+
+author: Valentyn Kuts
+
+Testing application:
+https://github.com/stamparm/DSVW
+----------------------------------
+tool1 (SAST):
+https://sonarcloud.io/about
+----------------------------------
+tool2 (DAST):
+http://www.golismero.com/
+
+Terminal:
+golismero scan http://localhost:65412 -d Nmap -d Harv* -d brute* -d DNS* -o golismeroReport.html    
+---------------------
+tool3(ZAP)
+https://www.zaproxy.org/
